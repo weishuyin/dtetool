@@ -7,7 +7,11 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#ifdef __APPLE__
+#include <sys/syslimits.h>
+#else
 #include <linux/limits.h>
+#endif
 #include "dtetool.h"
 #include "dtefunc.h"
 
@@ -23,7 +27,7 @@ int main(int argc, char *argv[]) {
     extern char *optarg;
     extern int optind;
     fname_input = argv[1];
-    while ((c = getopt(argc, argv, "o:d:p")) != -1) {
+    while ((c = getopt(argc - 1, argv + 1, "o:d:p")) != -1) {
         switch (c) {
             case 'o':
                 fname_output = optarg;

@@ -7,7 +7,11 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#ifdef __APPLE__
+#include <sys/syslimits.h>
+#else
 #include <linux/limits.h>
+#endif
 #include "dtetool.h"
 #include "dtefunc.h"
 #include "usage.h"
